@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "oldPrice": {
+      "type": "decimal"
+    },
+    "productImages": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "rating": {
+      "type": "decimal"
+    },
+    "description": {
+      "type": "text"
+    },
+    "discount": {
+      "type": "integer"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "sub_cats": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sub-cat.sub-cat",
+      "inversedBy": "products"
+    },
+    "product_weights": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-weight.product-weight",
+      "mappedBy": "product"
+    },
+    "product_rams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product-ram.product-ram",
+      "inversedBy": "products"
+    },
+    "fashion_product_sizes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fashion-product-size.fashion-product-size",
+      "mappedBy": "product"
+    },
+    "brand": {
+      "type": "string"
+    }
+  }
+}
