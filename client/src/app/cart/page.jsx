@@ -10,9 +10,10 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { MyContext } from '@/context/ThemeContext';
 import axios from 'axios';
 
-import { useRouter } from 'next/navigation';
-import { fetchDataFromApi } from "@/utils/api";
+
+import { editData, fetchDataFromApi } from "@/utils/api";
 import { deleteData } from '@/utils/api';
+import {useRouter} from 'next/navigation'
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -26,8 +27,20 @@ const Cart = () => {
 
     }, [context.cartItems]);
 
-
-    const updateCart = (items) => {
+useEffect(()=>{
+    const is_Login = localStorage.getItem('isLogin');
+    if(is_Login!=="true"){
+        history.push('/signIn');
+    }
+    
+},[]);
+    const updateCart = (items,index) => {
+        let updatedData={
+            data:{
+                "quantity":items[index]?.quantity
+            }
+        }
+         editData(`/api/cart-datas/${items[index].id}`, updatedData);
         setCartItems(items)
     }
 
@@ -68,7 +81,7 @@ const Cart = () => {
                             <div className='d-flex align-items-center w-100'>
                                 <div className='left'>
                                     <h1 className='hd mb-0'>Your Cart</h1>
-                                    <p>There are <span className='text-g'>{cartItems.length}</span> products in your cart</p>
+                                    <p>There are <span className='text-g'>{cartItems?.length}</span> products in your cart</p>
                                 </div>
                             </div>
 

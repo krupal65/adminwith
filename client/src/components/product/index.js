@@ -1,13 +1,14 @@
+"use client"
 import React, { useEffect, useState, useContext } from 'react';
 import './style.css';
 import Rating from '@mui/material/Rating';
-import { Button } from '@mui/material';
+import { Button, Snackbar, Alert } from '@mui/material';
 import Link from 'next/link';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CompareArrowsOutlinedIcon from '@mui/icons-material/CompareArrowsOutlined';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import { fetchDataFromApi } from '@/utils/api';
+import { fetchDataFromApi, postData } from '@/utils/api';
 
 import { MyContext } from '@/context/ThemeContext';
 
@@ -17,7 +18,7 @@ const Product = (props) => {
     const [productData, setProductData] = useState();
     const [isAdded, setIsadded] = useState(false);
     const [alreadyAddedInCart, setAlreadyAddedInCart] = useState(false);
-
+    const [showLoginMessage, setShowLoginMessage] = useState(false);
     const context = useContext(MyContext);
 
     useEffect(() => {
@@ -36,7 +37,15 @@ const Product = (props) => {
 
 
     const addToCart = (item) => {
-        getData(`/api/cart-datas?populate=*&[filters][productId]=${item.id}`, item);
+        const is_Login=localStorage.getItem('isLogin');
+        if(is_Login!=="true"){
+            alert('please Login first')
+        }
+        else{
+            getData(`/api/cart-datas?populate=*&[filters][productId]=${item.id}`, item);
+        }
+       
+       
 
     }
 
@@ -51,7 +60,17 @@ const Product = (props) => {
     }
 
 
-
+const addToMyList=(prodId)=>{
+    let myListData={
+        data:{
+            productId:prodId,
+            userId:localStorage.getItem('userId')
+        }
+    }
+    postData(`/api/my-lists`,myListData).then((res)=>{
+        
+    })
+}
 
 
     return (
@@ -64,24 +83,25 @@ const Product = (props) => {
             {
                 productData !== undefined &&
                 <>
-                    <Link href={`/product/${props.itemId}`}>
+                  
                         <div className='imgWrapper'>
+                        <Link href={`/product/${props.itemId}`}>
                             <div className='p-4 wrapper mb-3'>
                                 <img src={'http://localhost:1337' + productData.attributes.productImages.data[0].attributes.url} className='w-100' alt='productImage' />
                             </div>
-
+                            </Link>
                             <div className='overlay transition'>
                                 <ul className='list list-inline mb-0'>
                                     <li className='list-inline-item'>
-                                        <a className='cursor' tooltip="Add to Wishlist">
+                                        <a className='cursor' tooltip="Add to My List" onClick={() => addToMyList(props.itemId)}>
                                             <FavoriteBorderOutlinedIcon />
                                         </a>
                                     </li>
-                                    <li className='list-inline-item'>
+                                    {/* <li className='list-inline-item'>
                                         <a className='cursor' tooltip="Compare">
                                             <CompareArrowsOutlinedIcon />
                                         </a>
-                                    </li>
+                                    </li> */}
                                     <li className='list-inline-item'>
                                         <a className='cursor' tooltip="Quick View">
                                             <RemoveRedEyeOutlinedIcon />
@@ -91,11 +111,12 @@ const Product = (props) => {
                             </div>
                         </div>
 
-                    </Link>
+                  
 
                     <div className='info position-relative'>
                         <span className='d-block catName'>Brand Name</span>
-                        <h4 className='title'><Link href="/">{productData.attributes.name.substr(0, 50) + '...'}</Link></h4>
+                        
+                        <h4 className='title'><Link href={`/product/${props.itemId}`}>{productData.attributes.name.substr(0, 50) + '...'}</Link></h4>
                         <Rating name="half-rating-read"
                             value={parseFloat(productData.attributes.rating)} precision={0.5} readOnly />
                         <span className='brand d-block text-g'>By <Link href="/" className='text-g'>Product BrandLink</Link></span>
@@ -121,7 +142,15 @@ const Product = (props) => {
             }
 
 
-
+<Snackbar
+                open={showLoginMessage}
+                autoHideDuration={6000}
+                onClose={() => setShowLoginMessage(false)}
+            >
+                <Alert onClose={() => setShowLoginMessage(false)} severity="warning" sx={{ width: '100%' }}>
+                    Please log in first to add items to your cart.
+                </Alert>
+            </Snackbar>
 
 
 

@@ -774,6 +774,7 @@ export interface ApiCartCart extends Schema.CollectionType {
     singularName: 'cart';
     pluralName: 'carts';
     displayName: 'cart';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -818,6 +819,7 @@ export interface ApiCartDataCartData extends Schema.CollectionType {
     discount: Attribute.Integer;
     imgUrl: Attribute.Text;
     productId: Attribute.Integer;
+    userId: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -913,6 +915,37 @@ export interface ApiFashionProductSizeFashionProductSize
   };
 }
 
+export interface ApiMyListMyList extends Schema.CollectionType {
+  collectionName: 'my_lists';
+  info: {
+    singularName: 'my-list';
+    pluralName: 'my-lists';
+    displayName: 'myList';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    productId: Attribute.Integer;
+    userId: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::my-list.my-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::my-list.my-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Schema.CollectionType {
   collectionName: 'orders';
   info: {
@@ -934,6 +967,7 @@ export interface ApiOrderOrder extends Schema.CollectionType {
     paymentId: Attribute.Text;
     pincode: Attribute.String;
     products: Attribute.JSON;
+    date: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1184,6 +1218,7 @@ declare module '@strapi/types' {
       'api::cart-data.cart-data': ApiCartDataCartData;
       'api::category.category': ApiCategoryCategory;
       'api::fashion-product-size.fashion-product-size': ApiFashionProductSizeFashionProductSize;
+      'api::my-list.my-list': ApiMyListMyList;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::product-ram.product-ram': ApiProductRamProductRam;

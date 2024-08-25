@@ -77,6 +77,7 @@ const SignIn = () => {
                 // ...
             })
             .catch((error) => {
+                
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
@@ -94,9 +95,12 @@ const SignIn = () => {
           const token = credential.accessToken;
           // The signed-in user info.
           const user = result.user;
-          localStorage.setItem('userEmail',user.email);
-          localStorage.setItem('userId',user.uid);
+        //    context.setLoginUser(user);
+        //    sessionStorage.setItem('loginwith','google');
          
+           let userEmail=localStorage.setItem('userEmail',user.email);
+           let userId=localStorage.setItem('userId',user.uid);
+          console.log(user);
 
           setShowLoader(false);
 
@@ -111,7 +115,7 @@ const SignIn = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           // The email of the user's account used.
-          const email = error.customData.email;
+           const email = error.customData.email;
           // The AuthCredential type that was used.
           const credential = GoogleAuthProvider.credentialFromError(error);
           // ...

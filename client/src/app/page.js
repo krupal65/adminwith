@@ -12,20 +12,21 @@ import Slider from "react-slick";
 import Image from 'next/image';
 import TopProducts from '@/components/TopProducts';
 
+
 export default function Home() {
 
   const [productData, setProductData] = useState([]);
-  const [catArray, setcatArray] = useState([]);
+  const [catArray, setcatArray] = useState([]);//subcategory na attribute title avi gyu
   const [activeTab, setactiveTab] = useState();
   const [activeTabIndex, setactiveTabIndex] = useState(0);
   const [activeTabData, setActiveTabData] = useState([]);
   const [isLoadingProducts, setIsLoadingProducts] = useState(false);
-  const [bestSells, setBestSells] = useState([]);
+  const [bestSells, setBestSells] = useState([]);//mens valao data che
+
 
   const productRow = useRef();
 
   const context = useContext(MyContext);
-
 
   var settings = {
     dots: false,
@@ -44,8 +45,15 @@ export default function Home() {
     getData("/api/categories?populate=*");
 
     getBestSellerData(`/api/products?populate=*&[filters][sub_cats][title]=${'MEN'}`)
-   
+    const is_Login=localStorage.getItem('isLogin');
+    
+   let userId=localStorage.getItem('userId');
+   if(userId!==""){
+    context.getCartData(`/api/cart-datas?populate=*&[filters][userId]=${userId}`);
+   }
     window.scrollTo(0, 0);
+
+   
   }, []);
 
 
@@ -57,7 +65,7 @@ export default function Home() {
       setProductData(res);
       context.setProductData(res.data);
 
-      console.log(res.data)
+      console.log(res.data)//all data is here
       res.data.length !== 0 && res.data.map((item) => {
         item.attributes.sub_cats.data.map((subCat, index) => {
           cat_ARR.push({
@@ -67,15 +75,16 @@ export default function Home() {
 
         })
       })
-
+      //  console.log(cat_ARR); data double ave che atle uniquearray ma single thai jase
 
       const uniqueObject = {};
       const uniqueArray = cat_ARR.filter(obj => {
         const key = JSON.stringify(obj); // Convert object to a string for uniqueness
         return uniqueObject.hasOwnProperty(key) ? false : (uniqueObject[key] = true);
       });
-
-      setcatArray(uniqueArray);
+      // console.log(uniqueArray); 
+//data sigle thai gyo che
+      setcatArray(uniqueArray);//subcategory data is here 
 
       filterBySuCat(uniqueArray[0].title)
     })
@@ -84,6 +93,7 @@ export default function Home() {
 
   const getBestSellerData = (apiUrl) => {
     fetchDataFromApi(apiUrl).then(res => {
+      // console.log("bestsellsa",res);
       setBestSells(res);
     })
   }
@@ -92,6 +102,7 @@ export default function Home() {
 
   var filterProducts = [];
 
+  //when click on subcategory
   const filterBySuCat = (title) => {
     filterProducts = [];
     fetchDataFromApi(`/api/products?populate=*&[filters][sub_cats][title]=${title}&pagination[start]=0&pagination[limit]=10`).then(res => {

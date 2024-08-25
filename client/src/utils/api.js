@@ -31,3 +31,8 @@ export const deleteData = async (url, id ) => {
     const { res } = await axios.delete(`http://localhost:1337${url}${id}`, params)
     return res;
 }
+
+export const editData = async (url, updatedData ) => {
+    const { res } = await axios.put(`http://localhost:1337${url}`,updatedData,params)
+    return res;
+}

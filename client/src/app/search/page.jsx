@@ -31,6 +31,7 @@ const Search = ({ params }) => {
     const getCat = (apiUrl) => {
         fetchDataFromApi(apiUrl).then(res => {
             setcatData(res.data);
+            console.log(res.data)
         })
     }
 

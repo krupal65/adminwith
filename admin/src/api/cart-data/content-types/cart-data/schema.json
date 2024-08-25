@@ -50,6 +50,9 @@
     },
     "productId": {
       "type": "integer"
+    },
+    "userId": {
+      "type": "text"
     }
   }
 }

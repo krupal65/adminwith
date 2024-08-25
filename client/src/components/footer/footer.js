@@ -22,7 +22,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import Newsletter from '../../components/newsletter/index';
-import NewsletterImg from '../../assets/images/newsletter.png';
+import NewsletterImg from '../../assets/images/kk.jpg';
 import Image from 'next/image';
 
 const Footer = () => {
@@ -33,8 +33,8 @@ const Footer = () => {
                 <div className='container-fluid'>
                     <div className='box d-flex align-items-center'>
                         <div className='info'>
-                            <h2>Stay home & get your daily <br />needs from our shop</h2>
-                            <p>Start You'r Daily Shopping with Nest Mart</p>
+                            <h2>Stay home & get your  <br />needs from our shop</h2>
+                            <p>Start You'r Shopping with We</p>
                             <br /><br className='res-hide' />
                             <Newsletter />
                         </div>
@@ -111,7 +111,7 @@ const Footer = () => {
                     <div className='container-fluid'>
                         <div className='row'>
                             <div className='col-md-3 part1'>
-                                <Link href='/'><Image src={Logo} /></Link>
+                                {/* <Link href='/'><Image src={Logo} /></Link> */}
                                 <br /><br />
                                 <p>Awesome grocery store website template</p>
                                 <br />
@@ -127,33 +127,32 @@ const Footer = () => {
                             <div className='col-md-6 part2'>
                                 <div className='row'>
                                     <div className='col'>
-                                        <h3>Company</h3>
+                                        <h3>INTENSE JEWELS</h3>
                                         <ul class="footer-list mb-sm-5 mb-md-0">
                                             <li><Link href="#">About Us</Link></li>
-                                            <li><Link href="#">Delivery Information</Link></li>
-                                            <li><Link href="#">Privacy Policy</Link></li>
-                                            <li><Link href="#">Terms &amp; Conditions</Link></li>
+                                            <li><Link href="#">Review</Link></li>
+                                            <li><Link href="#">Certification</Link></li>
+                                            {/* <li><Link href="#">Terms &amp; Conditions</Link></li> */}
                                             <li><Link href="#">Contact Us</Link></li>
-                                            <li><Link href="#">Support Center</Link></li>
-                                            <li><Link href="#">Careers</Link></li>
+                                            {/* <li><Link href="#">Support Center</Link></li>
+                                            <li><Link href="#">Careers</Link></li> */}
                                         </ul>
                                     </div>
 
                                     <div className='col'>
-                                        <h3>Company</h3>
+                                        <h3>EXPLORE</h3>
                                         <ul class="footer-list mb-sm-5 mb-md-0">
-                                            <li><Link href="#">Account</Link></li>
-                                            <li><Link href="#">Delivery Information</Link></li>
+      
                                             <li><Link href="#">Privacy Policy</Link></li>
                                             <li><Link href="#">Terms &amp; Conditions</Link></li>
-                                            <li><Link href="#">Contact Us</Link></li>
-                                            <li><Link href="#">Support Center</Link></li>
-                                            <li><Link href="#">Careers</Link></li>
+                                            <li><Link href="#">Payment plans</Link></li>
+                                            <li><Link href="#">Return & Exchange</Link></li>
+                                            <li><Link href="#">Shipping and Delivery</Link></li>
                                         </ul>
                                     </div>
 
 
-                                    <div className='col'>
+                                    {/* <div className='col'>
                                         <h3>Corporate</h3>
                                         <ul class="footer-list mb-sm-5 mb-md-0">
                                             <li><Link href="#">About Us</Link></li>
@@ -164,10 +163,10 @@ const Footer = () => {
                                             <li><Link href="#">Support Center</Link></li>
                                             <li><Link href="#">Careers</Link></li>
                                         </ul>
-                                    </div>
+                                    </div> */}
 
 
-                                    <div className='col'>
+                                    {/* <div className='col'>
                                         <h3>Popular</h3>
                                         <ul class="footer-list mb-sm-5 mb-md-0">
                                             <li><Link href="#">About Us</Link></li>
@@ -178,7 +177,7 @@ const Footer = () => {
                                             <li><Link href="#">Support Center</Link></li>
                                             <li><Link href="#">Careers</Link></li>
                                         </ul>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 

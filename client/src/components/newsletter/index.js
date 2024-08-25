@@ -5,11 +5,12 @@ import { Button } from '@mui/material';
 
 const Newsletter = () => {
     return (
-        <div className='newsLetterBanner'>
-            <SendOutlinedIcon />
-            <input type='text' placeholder='Your email address' />
-            <Button className='bg-g'>Subscribe</Button>
-        </div>
+        <></>
+        // <div className='newsLetterBanner'>
+        //     <SendOutlinedIcon />
+        //     <input type='text' placeholder='Your email address' />
+        //     <Button className='bg-g'>Subscribe</Button>
+        // </div>
     )
 }
 

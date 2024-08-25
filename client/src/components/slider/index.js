@@ -4,8 +4,8 @@ import React, { useEffect, useContext} from 'react';
 import Slider from "react-slick";
 import './index.css';
 
-import Slide1 from '../../assets/images/slider-1.png';
-import Slide2 from '../../assets/images/slider-2.png';
+import Slide1 from '../../assets/images/10.jpg';
+import Slide2 from '../../assets/images/104.jpg';
 
 import Newsletter from '../../components/newsletter/index';
 
@@ -38,26 +38,23 @@ const HomeSlider = () => {
                         <div className='info'>
                             <h2 class="mb-4">
                                 Don’t miss amazing<br />
-                                grocery deals
+                                Jewellery deals
                             </h2>
-                            <p>Sign up for the daily newsletter</p>
+                            <p>Every piece is expertly crafted for a look lasts a lifetime</p>
                         </div>
                     </div>
                     <div className="item">
-                        <Image src={Slide2} className='w-100' alt='slide' />
+                        <Image src={Slide2} className='w-100 ' alt='slide' />
                         <div className='info'>
                             <h2 class="mb-3">
-                                Fresh Vegetables<br />
-                                Big discount
+                                Just Perfect<br />
+                                
                             </h2>
-                            <p>Sign up for the daily newsletter</p>
+                            <p>Every piece is expertly crafted for a look lasts a lifetime </p>
                         </div>
                     </div>
                 </Slider>
 
-                {
-                    context.windowWidth>992 && <Newsletter/>
-                }
                 
 
             </div>

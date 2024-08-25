@@ -5,10 +5,12 @@ import { MyContext } from "./ThemeContext";
 import axios from 'axios';
 import { fetchDataFromApi } from '@/utils/api';
 import { postData } from '@/utils/api';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const ThemeProvider = ({ children }) => {
 
-  const [productData, setProductData] = useState([]);
+  const [productData, setProductData] = useState([]); 
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -20,6 +22,11 @@ const ThemeProvider = ({ children }) => {
 
   const [cartTotalAmount, setCartTotalAmount] = useState();
   
+  const [snackbar, setSnackbar] = useState({
+    color:'',
+    msg:'',
+    isOpen:null
+  });
 
 
   const [isLogin, setIsLogin] = useState();
@@ -29,8 +36,9 @@ const ThemeProvider = ({ children }) => {
 
     const is_Login = localStorage.getItem('isLogin');
     setIsLogin(is_Login);
-    getCartData(`/api/cart-datas`);
-
+    let userId=localStorage.getItem('userId');
+    getCartData(`/api/cart-datas?populate=*&[filters][userId]=${userId}`);
+ 
   }, []);
 
   const getCartData = (url) => {
@@ -61,6 +69,7 @@ const ThemeProvider = ({ children }) => {
         imgUrl: item.attributes.productImages.data[0].attributes.url,
         productId: item.id,
         products: item.id,
+        userId: localStorage.getItem('userId')//konsa product kis user ne add
       }
     }
 
@@ -82,10 +91,20 @@ const ThemeProvider = ({ children }) => {
     const is_Login = localStorage.getItem('isLogin');
     setIsLogin(is_Login);
   }
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setSnackbar({ 
+      isOpen:false,
+      msg:'',
+      color:'' });
 
+    };
 
   const signOut = () => {
-    localStorage.removeItem('isLogin');
+    localStorage.clear();
+    // localStorage.removeItem('isLogin');
     setIsLogin(false);
   }
 
@@ -114,14 +133,22 @@ const ThemeProvider = ({ children }) => {
     setCartItems,
     getCartData,
     setCartTotalAmount,
-    cartTotalAmount
-  }
-
-
-
+    cartTotalAmount,
+    setSnackbar,snackbar
+  };
   return (
     <MyContext.Provider value={value}>
-  
+   <Snackbar open={snackbar.isOpen} autoHideDuration={6000} onClose={handleClose}
+   className='snackbar'>
+        <Alert
+          onClose={handleClose}
+          severity={snackbar.color}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+         {snackbar.msg}
+        </Alert>
+      </Snackbar>
       {children}
     </MyContext.Provider>
   )

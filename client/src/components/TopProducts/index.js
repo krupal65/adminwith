@@ -11,7 +11,7 @@ import Image from 'next/image';
 const TopProducts = (props) => {
     return (
         <>
-            <div className='topSelling_box'>
+            {/* <div className='topSelling_box'>
                 <h3>{props.title}</h3>
 
                 <div className='items d-flex align-items-center'>
@@ -68,12 +68,12 @@ const TopProducts = (props) => {
                             <span className='price text-g font-weight-bold'>$28.85</span> <span className='oldPrice'>$32.8</span>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
 
 
 
-            </div>
+            {/* </div> */}
         </>
     )
 }

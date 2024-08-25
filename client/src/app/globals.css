@@ -425,3 +425,87 @@ ul.breadcrumb li a:hover {
 .checkoutPage .form{zoom: 135%; background: #f1f1f1; padding: 40px;}
 .checkoutPage .form button{zoom: 80%;}
 .checkoutPage .card{background: #f1f1f1 !important;}
+.snackbar{zoom:140%; left:inherit !important;bottom:inherit !important;top:15% !important;right:3% !important;}
+
+.orderPage{padding: 45px 25 px;}
+/* styles/globals.css or any relevant CSS file */
+
+.not-found {
+  text-align: center;
+  padding: 100px;
+  background: #f2f2f2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation: fadeIn 1s ease-in;
+}
+
+.not-found-title {
+  font-size: 100px;
+  color: #ff6f61;
+  animation: bounceIn 1s ease-out;
+}
+
+.not-found-message {
+  font-size: 24px;
+  color: #333;
+  margin: 20px 0;
+  animation: fadeInUp 1s ease-out;
+}
+
+.redirect-message {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.home-link {
+  font-size: 18px;
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 2px solid #ff6f61;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.home-link:hover {
+  background: #ff6f61;
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

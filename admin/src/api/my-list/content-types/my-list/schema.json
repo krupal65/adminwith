@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "my_lists",
+  "info": {
+    "singularName": "my-list",
+    "pluralName": "my-lists",
+    "displayName": "myList"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productId": {
+      "type": "integer"
+    },
+    "userId": {
+      "type": "text"
+    }
+  }
+}

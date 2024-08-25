@@ -16,8 +16,8 @@ const QuantityBox = (props) => {
     }, [props.cartItems])
 
 
-    const updateCart=(items)=>{
-        props.updateCart(items)
+    const updateCart=(items,index)=>{
+        props.updateCart(items,index);
     }
 
 
@@ -48,7 +48,7 @@ const QuantityBox = (props) => {
                            
                         });
                             
-                        updateCart(_cart);
+                        updateCart(_cart,props.index);
                         setcartItems(_cart);
                        
                     }
@@ -70,7 +70,8 @@ const QuantityBox = (props) => {
 
                           
                             
-                            updateCart(_cart);
+                               
+                        updateCart(_cart,props.index);
                             setcartItems(_cart);
 
 

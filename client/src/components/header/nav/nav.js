@@ -9,14 +9,10 @@ import { useState } from 'react';
 import { MyContext } from '../../../context/ThemeContext';
 
 const Nav = (props) => {
-
-
     const [navData, setNavData] = useState([]);
     const [isOpenNav, setIsOpenNav] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
     const context = useContext(MyContext);
-
     useEffect(() => {
         setNavData(props.data.data);
     }, [])
@@ -24,33 +20,30 @@ const Nav = (props) => {
     useEffect(() => {
         setIsOpenNav(props.openNav)
     }, [props.openNav])
-
-
     const closeNav = () => {
         props.closeNav();
     }
-
     return (
         <>
             {
                 isOpenNav === true && <div className='navbarOverlay' onClick={props.closeNav}></div>
             }
             <div className={`nav d-flex align-items-center ${isOpenNav === true && 'click'}`}>
-                <div className='container-fluid'>
+                <div className='container-fluid blue'>
                     <div className='row position-relative'>
-                        <div className='col-sm-2 part1 d-flex align-items-center'>
+                        {/* <div className='col-sm-2 part1 d-flex align-items-center'>
                             <Button className='bg-g text-white catTab res-hide'>
                                 <GridViewIcon /> &nbsp;Browse All Categories <KeyboardArrowDownIcon /></Button>
-                        </div>
+                        </div> */}
 
-                        <div className='col-sm-8 part2 position-static'>
+                        <div className='col-sm-10 part2 position-static'>
                             <nav className={isOpenNav === true ? 'open' : ''}>
                                 <ul className='list list-inline mb-0'>
-                                    <li className='list-inline-item'>
+                                    <li className='list-inline-item '>
                                         <Button><Link href={'/'} onClick={props.closeNav}>Home</Link></Button>
                                     </li>
 
-                                    {
+                                     {
                                         navData !== undefined && navData?.length !== 0 &&
                                         navData?.map((item, index) => {
 
@@ -99,9 +92,7 @@ const Nav = (props) => {
                                                 )
                                             }
                                         })
-                                    }
-
-
+                                    } 
 
 
                                     <li className='list-inline-item'>
@@ -150,9 +141,9 @@ const Nav = (props) => {
                                                     })
                                                 }
 
-                                                <div className='col'>
+                                                {/* <div className='col'>
                                                     <img src="https://wp.alithemes.com/html/nest/demo/assets/imgs/banner/banner-menu.png" className='w-100' />
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
                                     </li>

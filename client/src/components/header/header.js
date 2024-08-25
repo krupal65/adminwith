@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import '../header/header.css';
-import Logo from '../../assets/images/logo.svg';
+// import Logo from '../../assets/images/logo.jpg';
 import SearchIcon from '@mui/icons-material/Search';
 import Select from '../selectDrop/select';
 import axios from 'axios';
@@ -25,7 +25,7 @@ import Link from 'next/link';
 import { useContext } from 'react';
 
 import { MyContext } from '../../context/ThemeContext';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 
@@ -45,10 +45,6 @@ const Header = (props) => {
     const [catData, setCatData] = useState([]);
 
     const [searchInputValue, setsearchInputValue] = useState();
-
-
-
-
     const headerRef = useRef();
     const searchInput = useRef()
 
@@ -66,10 +62,7 @@ const Header = (props) => {
         getCatData();
     }, [context.productData]);
     //context.productData means ek var data avyo pachi stop load thaine nai to contiouns request jase
-
-
     const cat = [];
-
     const getCatData = () => {
         fetchDataFromApi("/api/categories?populate=*").then(res => {
          // console.log("cagtegorydata",res.data);//ama attributes se ama image ne e bathu product deatil che
@@ -81,9 +74,6 @@ const Header = (props) => {
                     //serach ni baju ma categories che ama dekhse all categori
                      
                 })
-
-
-
             const uniqueObject = {};
             const uniqueArray = cat.filter(obj => {
                 const key = JSON.stringify(obj); // Convert object to a string for uniqueness
@@ -94,9 +84,7 @@ const Header = (props) => {
             //setcategories array ma add category name batha
             // console.log(setcategories);
         })
-    }
-
-
+    };
     const countryList = [];
     const getCountry = async (url) => {
         try {
@@ -106,8 +94,7 @@ const Header = (props) => {
                     res.data.data.map((item, index) => {
                         countryList.push(item.country);
                         //console.log(item.country)
-                    })
-
+                    });
                     //console.log(res.data.data[0].country)
                 }
             })
@@ -134,6 +121,7 @@ const Header = (props) => {
     const signOut = () => {
         context.signOut();
         history.push('/');
+        context.setCartItems([]);
     }
 
     const openSearch = () => {
@@ -189,7 +177,7 @@ const Header = (props) => {
                     <div className='container-fluid'>
                         <div className='row'>
                             <div className='col-sm-2 part1 d-flex align-items-center'>
-                                <Link href="/"><Image src={Logo} className='logo' /></Link>
+                                {/* <Link href="/"><Image src={Logo} className='logo' /></Link> */}
                                 {
                                     context.windowWidth < 992 &&
                                     <div className='ml-auto d-flex align-items-center'>
@@ -301,9 +289,9 @@ const Header = (props) => {
                                                             isOpenDropDown !== false &&
                                                             <ul className='dropdownMenu'>
                                                                 <li><Button className='align-items-center'><Person2OutlinedIcon /> My Account</Button></li>
-                                                                <li><Button><LocationOnOutlinedIcon /> Order Tracking</Button></li>
+                                                                <li><Link href="/orders"><Button><LocationOnOutlinedIcon /> Orders</Button></Link></li>
                                                                 <li><Button><FavoriteBorderOutlinedIcon /> My Wishlist</Button></li>
-                                                                <li><Button><SettingsOutlinedIcon /> Setting</Button></li>
+                                                                {/* <li><Button><SettingsOutlinedIcon /> Setting</Button></li> */}
                                                                 <li><Button onClick={signOut}><LogoutOutlinedIcon /> Sign out</Button></li>
                                                             </ul>
                                                         }
@@ -361,9 +349,7 @@ const Header = (props) => {
             }
 
         </>
-
-
-    )
+    );
 }
 
 export default Header;
